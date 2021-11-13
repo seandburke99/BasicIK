@@ -9,28 +9,30 @@ link new_link(uint32_t len){
     return s;
 }
 
-void print_seg(link *s){
+void print_link(link *s){
     printf("Top: (%d,%d), Bottom: (%d,%d)\n", s->top.x, s->top.y, s->bottom.x, s->bottom.y);
 }
 
 SDL_bool link_follow(link *s, const point *p){
     point temp2 = new_point(
-        s->bottom.x - s->top.x,
-        s->bottom.y - s->top.y
+        s->top.x - s->bottom.x,
+        s->top.y - s->bottom.y
     );
     point temp1 = new_point(
-        s->bottom.x - p->x,
-        s->bottom.y - p->y
+        p->x - s->bottom.x,
+        p->y - s->bottom.y
     );
-    s->angle += dir(&temp1) - dir(&temp2);
+    s->angle += dir(&temp2) - dir(&temp1);
     if(s->angle > M_2PI){
         s->angle -= M_2PI;
     }else if(s->angle < -M_2PI){
         s->angle += M_PI*2;
     }
+
     s->top = *p;
-    s->bottom.x = s->top.x + s->len*SDL_cos(3.14159-s->angle);
-    s->bottom.y = s->top.y + s->len*SDL_sin(3.14159-s->angle);
+    s->bottom.x = s->top.x + s->len*SDL_cos(s->angle);
+    s->bottom.y = s->top.y + s->len*SDL_sin(s->angle);
+
     return SDL_TRUE;
 }
 

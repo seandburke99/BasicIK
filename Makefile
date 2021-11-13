@@ -4,7 +4,7 @@
 
 # Compiler settings - Can be customized.
 CC = gcc
-CXXFLAGS = -std=c11 -Wall
+CXXFLAGS = -std=c11 -Wall -Wno-unused-command-line-argument
 LDFLAGS = -I$(INCDIR) $(shell pkg-config --cflags --libs SDL2_image)
 
 # Makefile settings - Can be customized.

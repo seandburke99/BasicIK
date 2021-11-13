@@ -1,7 +1,7 @@
 #include <arm.h>
 #include <string.h>
 
-#define SCREEN_WIDTH 800
+#define SCREEN_WIDTH 1000
 #define SCREEN_HEIGHT 600
 #define FPS 60
 #define DELAY 1000/FPS
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){
     SDL_Window* win = NULL;
     SDL_Renderer* ren = NULL;
 
-    win = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    win = SDL_CreateWindow( "Inverse Kinematics", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
     if(win==NULL){
         fprintf(stderr, "Unable to create window\n");
     }
@@ -44,8 +44,10 @@ int main(int argc, char *argv[]){
     for(int i=0;i<num;i++){
         a.links[i] = new_link(len);
     }
+    a.links[0].bottom = new_point(SCREEN_WIDTH/2, SCREEN_HEIGHT);
     while(!quit){
         SDL_Event e;
+        SDL_bool uparm = SDL_FALSE;
         while( SDL_PollEvent( &e ) != 0 ){
             switch(e.type){
                 case SDL_QUIT:
@@ -60,13 +62,15 @@ int main(int argc, char *argv[]){
                     break;
                 case SDL_MOUSEMOTION:
                     SDL_GetMouseState(&target.x, &target.y);
+                    uparm = SDL_TRUE;
                     break;
                 default:
                     break;
             }
         }
         clr_ren(ren);
-        update_arm(&a, &target);
+        if(uparm)
+            update_arm(&a, &target);
         draw_arm(ren, &a);
         //Blit
         SDL_RenderPresent(ren);

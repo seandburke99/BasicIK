@@ -5,7 +5,6 @@
 #include <point.h>
 #include <stdint.h>
 
-#define M_PI 3.14159265358979323846 //PI
 #define M_2PI 2*M_PI
 
 typedef struct link link;
@@ -18,7 +17,7 @@ struct link{
 };
 
 link new_link(uint32_t len);
-void print_seg(link *s);
+void print_link(link *s);
 SDL_bool link_follow(link *s, const point *p);
 SDL_bool draw_link(SDL_Renderer *r, const link *seg);
 
