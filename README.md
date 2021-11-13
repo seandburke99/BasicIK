@@ -1,6 +1,7 @@
 # BasicIK
 SDL C project for inverse kinematics.
 Written to get a basic understanding of various SDL2 components, practice C, and learn the basics of calculating inverse kinematics.
+Insipired by the video made by "The Coding Train" on YouTube.
 ## Requirements
 Install SDL2  
 ```bash
