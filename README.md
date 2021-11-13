@@ -17,6 +17,6 @@ In the repository base directory, run the `make` command.
 ```bash
 ./ik
 ```
-argument options are
+### Argument options are
 1. "--links <number of links>"
 2. "--linkslen <pixel length of links>"
